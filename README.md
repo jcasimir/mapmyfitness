@@ -1,6 +1,6 @@
-# Mapmyfitness
+# MapMyFitness
 
-TODO: Write a gem description
+The gem wraps the [MapMyFitness v7 API](https://developer.mapmyapi.com/). It needs an OAuth2 authorization token, which can be retrieved via the [MapMyFitness OAuth2 OmniAuth Strategy](/jcasimir/omniauth-mapmyfitness-oauth2/).
 
 ## Installation
 
