@@ -18,7 +18,45 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+So far, you can use the library to...
+
+### Parse User Data
+
+When you use the OmniAuth strategy to login with MapMyFitness, your callback URL will receive a large hash of data. The `User` class will parse it into an easy-to-use Ruby object instance. Starting in a `sessions_controller#create` which handles the callback:
+
+```ruby
+user_data = MapMyFitness::User.new(request.env["omniauth.auth"])
+```
+
+Then, if you'd like to save the data to your database, you could do something like this:
+
+```ruby
+user_data = MapMyFitness::User.new(request.env["omniauth.auth"])
+@user = User.find_or_create_by_auth(user_data)
+```
+
+And down in the `User` model:
+
+```ruby
+  def self.find_or_create_by_auth(user_data)
+    find_or_create_by_provider_and_uid(user_data.provider, 
+                                       user_data.uid,
+                                       username: user_data.username,
+                                       email: user_data.email,
+                                       token: user_data.token)
+  end
+```
+
+### Fetch Workouts
+
+Once you have a user OAuth2 token, then you can request the workouts for that user. For example:
+
+```ruby
+store = MapMyFitness::WorkoutStore.new(current_user.token)
+store.workouts_by(current_user.uid)
+```
+
+The `token` is used to sign the request, while the `uid` identifies the user who owns the workout data.
 
 ## Contributing
 
