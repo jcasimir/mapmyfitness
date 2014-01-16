@@ -6,14 +6,18 @@ module MapMyFitness
 
     def build_connection
       connection = Faraday.new
-      connection.headers['Api-Key'] = "qjy542tq9waw28njuqv7hz4ttddc2bch"
+      connection.headers['Api-Key'] = Config.api_key
       connection
     end
 
-    def records_for(user_id, token)
+    def raw_workouts_for_user(id, token)
       connection.headers['Authorization'] = "Bearer #{token}"
-      response = connection.get("https://oauth2-api.mapmyapi.com/v7.0/workout/?user=#{user_id}&access_token=#{token}")
+      response = connection.get("https://oauth2-api.mapmyapi.com/v7.0/workout/?user=#{id}&access_token=#{token}")
       JSON.parse(response.body)
+    end
+
+    def records_for(user_id, token)
+      raw_workouts_for_user(user_id, token)
     end
   end
 end
