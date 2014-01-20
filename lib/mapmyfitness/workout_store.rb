@@ -57,8 +57,8 @@ module MapMyFitness
     end
 
     def two_weeks_ago
-      two_weeks_ago = DateTime.now - 14
-      result = two_weeks_ago.to_time.iso8601.gsub(":", "%3A")
+      date_time_two_weeks_ago = DateTime.now - 14
+      result = date_time_two_weeks_ago.to_time.iso8601.gsub(":", "%3A")
       result[-8] = "%2B"
       result
     end
