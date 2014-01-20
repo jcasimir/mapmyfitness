@@ -45,6 +45,7 @@ module MapMyFitness
         workout.name = data['name']
         workout.started_at = data['start_datetime']
         workout.duration = data['aggregates']['active_time_total']
+        workout.distance = data['aggregates']['distance_total']
         workout
       end
 
