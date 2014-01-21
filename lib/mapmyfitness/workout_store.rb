@@ -52,8 +52,6 @@ module MapMyFitness
       remove_duplicates_from(workouts)
     end
 
-    # workouts_by_user_in_last_days(current_user.uid, 14)
-
     def remove_duplicates_from(sessions)
       sessions.uniq{|session| session.id}
     end
