@@ -22,7 +22,7 @@ So far, you can use the library to...
 
 ### Parse User Data
 
-When you use the OmniAuth strategy to login with MapMyFitness, your callback URL will receive a large hash of data. The `User` class will parse it into an easy-to-use Ruby object instance. Starting in a `sessions_controller#create` which handles the callback:
+When you use the OmniAuth strategy to login with MapMyFitness v7 OAuth2 API, your callback URL will receive a large hash of data. The `User` class will parse it into an easy-to-use Ruby object instance. Starting in a `sessions_controller#create` which handles the callback:
 
 ```ruby
 user_data = MapMyFitness::User.new(request.env["omniauth.auth"])
